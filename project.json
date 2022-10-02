@@ -1,0 +1,198 @@
+{
+	"contentrating" : "Everyone",
+	"description" : "A simple wallpaper featuring all currently available pokémon as a animated sprite when possible.",
+	"file" : "index.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"allowalternateforms" : 
+			{
+				"index" : 3,
+				"order" : 103,
+				"text" : "Allow Alternate Forms",
+				"type" : "bool",
+				"value" : true
+			},
+			"allowstaticartworks" : 
+			{
+				"index" : 2,
+				"order" : 102,
+				"text" : "Allow Static Artworks",
+				"type" : "bool",
+				"value" : false
+			},
+			"allowstaticgen5sprites" : 
+			{
+				"index" : 0,
+				"order" : 100,
+				"text" : "Allow Static Gen 5 Sprites",
+				"type" : "bool",
+				"value" : false
+			},
+			"allowstaticgen8sprites" : 
+			{
+				"index" : 1,
+				"order" : 101,
+				"text" : "Allow Static Gen 8 Sprites",
+				"type" : "bool",
+				"value" : false
+			},
+			"automaticpokemonswitching" : 
+			{
+				"index" : 4,
+				"order" : 104,
+				"text" : "Automatic Pokémon Switching",
+				"type" : "bool",
+				"value" : true
+			},
+			"backgroundcolor" : 
+			{
+				"condition" : "backgroundtype.value == \"lineargradient\" || backgroundtype.value == \"radialgradient\" || backgroundtype.value == \"solid\"",
+				"index" : 8,
+				"order" : 108,
+				"text" : "Background Color",
+				"type" : "color",
+				"value" : "0.5 0.5 0.5"
+			},
+			"backgroundtype" : 
+			{
+				"index" : 6,
+				"options" : 
+				[
+					{
+						"label" : "Linear Gradient",
+						"value" : "lineargradient"
+					},
+					{
+						"label" : "Radial Gradient",
+						"value" : "radialgradient"
+					},
+					{
+						"label" : "Mix Types Color",
+						"value" : "mixtypes"
+					},
+					{
+						"label" : "First Type Color",
+						"value" : "firsttype"
+					},
+					{
+						"label" : "Second Type Color",
+						"value" : "secondtype"
+					},
+					{
+						"label" : "Solid Color",
+						"value" : "solid"
+					}
+				],
+				"order" : 106,
+				"text" : "Background Type",
+				"type" : "combo",
+				"value" : "lineargradient"
+			},
+			"blacklistedpokemon" : 
+			{
+				"index" : 15,
+				"order" : 115,
+				"text" : "Blacklisted IDs (comma separated)",
+				"type" : "textinput",
+				"value" : ""
+			},
+			"customtypecolor" : 
+			{
+				"condition" : "displaylegend.value == true",
+				"index" : 10,
+				"order" : 110,
+				"text" : "Custom Type Color",
+				"type" : "bool",
+				"value" : true
+			},
+			"displaydetailedinfo" : 
+			{
+				"index" : 16,
+				"order" : 116,
+				"text" : "Display detailed info (debug)",
+				"type" : "bool",
+				"value" : false
+			},
+			"displaylegend" : 
+			{
+				"index" : 9,
+				"order" : 109,
+				"text" : "Display Pokémon Information",
+				"type" : "bool",
+				"value" : true
+			},
+			"enabletextshadow" : 
+			{
+				"condition" : "displaylegend.value == true",
+				"index" : 12,
+				"order" : 112,
+				"text" : "Enable Text Shadow",
+				"type" : "bool",
+				"value" : true
+			},
+			"gradientangle" : 
+			{
+				"condition" : "backgroundtype.value == \"lineargradient\"",
+				"fraction" : false,
+				"index" : 7,
+				"max" : 360,
+				"min" : 0,
+				"order" : 107,
+				"text" : "Gradient Angle",
+				"type" : "slider",
+				"value" : 135
+			},
+			"pokemonswitchingtimer" : 
+			{
+				"condition" : "automaticpokemonswitching.value == true",
+				"fraction" : false,
+				"index" : 5,
+				"max" : 86400,
+				"min" : 5,
+				"order" : 105,
+				"text" : "Pokémon Switching Timer (seconds)",
+				"type" : "slider",
+				"value" : 300
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0.9686274509803922 0.7411764705882353 0.12941176470588237"
+			},
+			"shadowcolor" : 
+			{
+				"condition" : "enabletextshadow.value == true && displaylegend.value == true",
+				"index" : 13,
+				"order" : 113,
+				"text" : "Shadow Color",
+				"type" : "color",
+				"value" : "0 0 0"
+			},
+			"textcolor" : 
+			{
+				"condition" : "displaylegend.value == true",
+				"index" : 11,
+				"order" : 111,
+				"text" : "Text Color",
+				"type" : "color",
+				"value" : "1 1 1"
+			},
+			"whitelistedpokemon" : 
+			{
+				"index" : 14,
+				"order" : 114,
+				"text" : "Whitelisted IDs (comma separated)",
+				"type" : "textinput",
+				"value" : ""
+			}
+		}
+	},
+	"preview" : "preview.gif",
+	"title" : "Animated Pokémon",
+	"type" : "web",
+	"version" : 0
+}
