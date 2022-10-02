@@ -87,129 +87,140 @@ const substitute_base64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgBAMAAAAQtmoLAAAAIVBMV
 
 // Wallpaper Engine Properties
 window.wallpaperPropertyListener = {
-    applyUserProperties: function (properties) {
-        clearInterval(update_interval_number);
-
-        if (properties.allowalternateforms) {
-            allowalternateforms = properties.allowalternateforms.value;
-        }
-        if (properties.allowstaticartworks) {
-            allowstaticartworks = properties.allowstaticartworks.value;
-        }
-        if (properties.allowstaticgen5sprites) {
-            allowstaticgen5sprites = properties.allowstaticgen5sprites.value;
-        }
-        if (properties.allowstaticgen8sprites) {
-            allowstaticgen8sprites = properties.allowstaticgen8sprites.value;
-        }
-        if (properties.automaticpokemonswitching) {
-            automaticpokemonswitching = properties.automaticpokemonswitching.value;
-        }
-        if (properties.backgroundtype) {
-            backgroundtype = properties.backgroundtype.value;
-        }
-        if (properties.gradientangle) {
-            gradientangle = properties.gradientangle.value;
-        }
-        if (properties.whitelistedpokemon) {
-            try {
-                if (properties.whitelistedpokemon.value === "")
-                    whitelistedpokemon = [];
-                else
-                    whitelistedpokemon = properties.whitelistedpokemon.value.split(",").map((number) => {
-                        return parseInt(number);
-                    });
-            } catch (e) {
-                whitelistedpokemon = [];
-            }
-
-            // Update if not in the whitelist
-            if (!whitelistedpokemon.includes(current_pokemon.id)) {
-                update(true);
-            }
-        }
-        if (properties.blacklistedpokemon) {
-            try {
-                if (properties.blacklistedpokemon.value == "")
-                    blacklistedpokemon = [];
-                else
-                    blacklistedpokemon = properties.blacklistedpokemon.value.split(",").map((number) => {
-                        return parseInt(number);
-                    });
-            } catch (e) {
-                blacklistedpokemon = [];
-            }
-
-            // Update if in the blacklist
-            if (blacklistedpokemon.includes(current_pokemon.id) || current_pokemon.id == 0) {
-                update(true);
-            }
-        }
-        if (properties.pokemonswitchingtimer) {
-            pokemonswitchingtimer = properties.pokemonswitchingtimer.value;
-        }
-        if (properties.schemecolor) {
-            // convert "0.0 0.0 0.0" to [r, g, b]
-            schemecolor = properties.schemecolor.value.split(" ").map((number) => {
-                return parseInt(number * 255);
-            });
-        }
-        if (properties.backgroundcolor) {
-            // convert "0.0 0.0 0.0" to [r, g, b]
-            backgroundcolor = properties.backgroundcolor.value.split(" ").map((number) => {
-                return parseInt(number * 255);
-            });
-        }
-        if (properties.textcolor) {
-            // convert "0.0 0.0 0.0" to [r, g, b]
-            textcolor = properties.textcolor.value.split(" ").map((number) => {
-                return parseInt(number * 255);
-            });
-        }
-        if (properties.shadowcolor) {
-            // convert "0.0 0.0 0.0" to [r, g, b]
-            shadowcolor = properties.shadowcolor.value.split(" ").map((number) => {
-                return parseInt(number * 255);
-            });
-        }
-        if (properties.customtypecolor) {
-            customtypecolor = properties.customtypecolor.value;
-        }
-        if (properties.enabletextshadow) {
-            enabletextshadow = properties.enabletextshadow.value;
-        }
-        if (properties.displaydetailedinfo) {
-            displaydetailedinfo = properties.displaydetailedinfo.value;
-
-            if (displaydetailedinfo) {
-                debug.style.display = "block";
-
-                update_info();
-                update_info_timer();
-                info_interval_number = setInterval(update_info_timer, 10);
-            } else {
-                debug.style.display = "none";
-
-                clearInterval(info_interval_number);
-            }
-        }
-        if (properties.displaylegend) {
-            displaylegend = properties.displaylegend.value;
-        }
-
-
-
-        if (automaticpokemonswitching) {
-            update_interval_number = setInterval(() => {
-                update(true);
-            }, 1000 * pokemonswitchingtimer);
-        }
-
-
-
-        update();
-    },
+    applyUserProperties: update_properties
 };
+
+
+
+
+
+
+
+
+
+
+function update_properties(properties = {}) {
+    clearInterval(update_interval_number);
+
+    if (properties.allowalternateforms) {
+        allowalternateforms = properties.allowalternateforms.value;
+    }
+    if (properties.allowstaticartworks) {
+        allowstaticartworks = properties.allowstaticartworks.value;
+    }
+    if (properties.allowstaticgen5sprites) {
+        allowstaticgen5sprites = properties.allowstaticgen5sprites.value;
+    }
+    if (properties.allowstaticgen8sprites) {
+        allowstaticgen8sprites = properties.allowstaticgen8sprites.value;
+    }
+    if (properties.automaticpokemonswitching) {
+        automaticpokemonswitching = properties.automaticpokemonswitching.value;
+    }
+    if (properties.backgroundtype) {
+        backgroundtype = properties.backgroundtype.value;
+    }
+    if (properties.gradientangle) {
+        gradientangle = properties.gradientangle.value;
+    }
+    if (properties.whitelistedpokemon) {
+        try {
+            if (properties.whitelistedpokemon.value === "")
+                whitelistedpokemon = [];
+            else
+                whitelistedpokemon = properties.whitelistedpokemon.value.split(",").map((number) => {
+                    return parseInt(number);
+                });
+        } catch (e) {
+            whitelistedpokemon = [];
+        }
+
+        // Update if not in the whitelist
+        if (!whitelistedpokemon.includes(current_pokemon.id)) {
+            update(true);
+        }
+    }
+    if (properties.blacklistedpokemon) {
+        try {
+            if (properties.blacklistedpokemon.value == "")
+                blacklistedpokemon = [];
+            else
+                blacklistedpokemon = properties.blacklistedpokemon.value.split(",").map((number) => {
+                    return parseInt(number);
+                });
+        } catch (e) {
+            blacklistedpokemon = [];
+        }
+
+        // Update if in the blacklist
+        if (blacklistedpokemon.includes(current_pokemon.id) || current_pokemon.id == 0) {
+            update(true);
+        }
+    }
+    if (properties.pokemonswitchingtimer) {
+        pokemonswitchingtimer = properties.pokemonswitchingtimer.value;
+    }
+    if (properties.schemecolor) {
+        // convert "0.0 0.0 0.0" to [r, g, b]
+        schemecolor = properties.schemecolor.value.split(" ").map((number) => {
+            return parseInt(number * 255);
+        });
+    }
+    if (properties.backgroundcolor) {
+        // convert "0.0 0.0 0.0" to [r, g, b]
+        backgroundcolor = properties.backgroundcolor.value.split(" ").map((number) => {
+            return parseInt(number * 255);
+        });
+    }
+    if (properties.textcolor) {
+        // convert "0.0 0.0 0.0" to [r, g, b]
+        textcolor = properties.textcolor.value.split(" ").map((number) => {
+            return parseInt(number * 255);
+        });
+    }
+    if (properties.shadowcolor) {
+        // convert "0.0 0.0 0.0" to [r, g, b]
+        shadowcolor = properties.shadowcolor.value.split(" ").map((number) => {
+            return parseInt(number * 255);
+        });
+    }
+    if (properties.customtypecolor) {
+        customtypecolor = properties.customtypecolor.value;
+    }
+    if (properties.enabletextshadow) {
+        enabletextshadow = properties.enabletextshadow.value;
+    }
+    if (properties.displaydetailedinfo) {
+        displaydetailedinfo = properties.displaydetailedinfo.value;
+
+        if (displaydetailedinfo) {
+            debug.style.display = "block";
+
+            update_info();
+            update_info_timer();
+            info_interval_number = setInterval(update_info_timer, 10);
+        } else {
+            debug.style.display = "none";
+
+            clearInterval(info_interval_number);
+        }
+    }
+    if (properties.displaylegend) {
+        displaylegend = properties.displaylegend.value;
+    }
+
+
+
+    if (automaticpokemonswitching) {
+        update_interval_number = setInterval(() => {
+            update(true);
+        }, 1000 * pokemonswitchingtimer);
+    }
+
+
+
+    update();
+}
 
 
 

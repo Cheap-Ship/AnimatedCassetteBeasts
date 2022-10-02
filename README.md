@@ -1,7 +1,7 @@
 # Animated Pokémon
 This is a custom Wallpaper Engine Web Wallpaper featuring **ALL** currently existing pokémon and their forms, most of the animated using Generation 5 sprites.
 
-I do not own any rights to the sprites used in this wallpaper. The data and images used in this wallpaper were provided by [PokéAPI](https://pokeapi.co/).
+I do not own any rights to the sprites used in this wallpaper. The data and images used were provided by [PokéAPI](https://pokeapi.co/).
 
 ## Features
 - Customize the type of background and the colors;
@@ -28,3 +28,9 @@ Requires [Python](https://www.python.org/) installed. Run `python build.py` to d
 ## External Resources
 - Font Credit: https://www.dafont.com/pokemon-classic.font
 - Data & Sprites Credit: https://github.com/PokeAPI/pokeapi
+
+## Examples
+
+![Example Wallpapers](examples/25.png)
+![Example Wallpapers](examples/272.png)
+![Example Wallpapers](examples/643.png)
