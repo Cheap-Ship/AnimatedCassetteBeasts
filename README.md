@@ -4,19 +4,19 @@ This is a custom Wallpaper Engine Web Wallpaper featuring **ALL** currently exis
 I do not own any rights to the sprites used in this wallpaper. The data and images used were provided by [PokéAPI](https://pokeapi.co/).
 
 ## Installing
-1. Download the latest [release](https://github.com/DaviAMSilva/AnimatedPokemon/releases/tag/latest)
-2. Extract the contents of the zip file to a folder
-3. Right click on the desktop and select `Create Wallpaper`
-4. Select `Create Wallpaper` on the Editor
-5. Search for folder you unzipped and select the `index.html` file
-6. Give the wallpaper a name and click `Create`
-7. Go to the Wallpaper tab and select the wallpaper
+1. Download the latest [release](https://github.com/DaviAMSilva/AnimatedPokemon/releases/tag/latest) from the releases page;
+2. Extract the contents of the zip file to a folder;
+3. Right click on the desktop and select `Create Wallpaper`;
+4. Select `Create Wallpaper` on the Editor;
+5. Search for folder you unzipped and select the `index.html` file;
+6. Give the wallpaper a name and click `Create`;
+7. Go to the Wallpaper tab in Wallpaper Engine and select the wallpaper.
 
 ## Features
 - Customize the type of background and the colors;
 - Click on the pokédex national number to choose a new random pokémon;
-- Whitelist and blacklist pokémon to be displayed;
-- Adjust the speed in which pokémon are cycle through;
+- Whitelist and blacklist pokémon to be displayed, using the pokédex national number, PokéAPI id or the pokémon name;
+- Adjust the speed in which pokémon are cycled through;
 - Choose the types of sprites to be displayed.
 
 ## Pokémon Sprites Types:

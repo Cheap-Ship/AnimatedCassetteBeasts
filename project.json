@@ -94,7 +94,7 @@
 			{
 				"index" : 15,
 				"order" : 115,
-				"text" : "Blacklisted IDs (comma separated)",
+				"text" : "Blacklisted Pokémon (comma separated)",
 				"type" : "textinput",
 				"value" : ""
 			},
@@ -185,7 +185,7 @@
 			{
 				"index" : 14,
 				"order" : 114,
-				"text" : "Whitelisted IDs (comma separated)",
+				"text" : "Whitelisted Pokémon (comma separated)",
 				"type" : "textinput",
 				"value" : ""
 			}

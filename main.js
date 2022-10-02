@@ -104,15 +104,31 @@ function update_properties(properties = {}) {
 
     if (properties.allowalternateforms) {
         allowalternateforms = properties.allowalternateforms.value;
+
+        if (!allowalternateforms && current_pokemon.id >= 10000) {
+            update(true);
+        }
     }
     if (properties.allowstaticartworks) {
         allowstaticartworks = properties.allowstaticartworks.value;
+
+        if (!allowstaticartworks && current_pokemon.sprite_type == "artwork") {
+            update(true);
+        }
     }
     if (properties.allowstaticgen5sprites) {
         allowstaticgen5sprites = properties.allowstaticgen5sprites.value;
+
+        if (!allowstaticgen5sprites && current_pokemon.sprite_type == "gen5") {
+            update(true);
+        }
     }
     if (properties.allowstaticgen8sprites) {
         allowstaticgen8sprites = properties.allowstaticgen8sprites.value;
+
+        if (!allowstaticgen8sprites && current_pokemon.sprite_type == "gen8") {
+            update(true);
+        }
     }
     if (properties.automaticpokemonswitching) {
         automaticpokemonswitching = properties.automaticpokemonswitching.value;
@@ -128,15 +144,15 @@ function update_properties(properties = {}) {
             if (properties.whitelistedpokemon.value === "")
                 whitelistedpokemon = [];
             else
-                whitelistedpokemon = properties.whitelistedpokemon.value.split(",").map((number) => {
-                    return parseInt(number);
+                whitelistedpokemon = properties.whitelistedpokemon.value.split(",").map((value) => {
+                    return parseInt(value) || value.trim();
                 });
         } catch (e) {
             whitelistedpokemon = [];
         }
 
         // Update if not in the whitelist
-        if (!whitelistedpokemon.includes(current_pokemon.id)) {
+        if (whitelistedpokemon.length > 0 && (!(whitelistedpokemon.includes(current_pokemon.id) || whitelistedpokemon.includes(current_pokemon.name) || whitelistedpokemon.includes(current_pokemon.form_name)))) {
             update(true);
         }
     }
@@ -145,15 +161,15 @@ function update_properties(properties = {}) {
             if (properties.blacklistedpokemon.value == "")
                 blacklistedpokemon = [];
             else
-                blacklistedpokemon = properties.blacklistedpokemon.value.split(",").map((number) => {
-                    return parseInt(number);
+                blacklistedpokemon = properties.blacklistedpokemon.value.split(",").map((value) => {
+                    return parseInt(value) || value.trim();
                 });
         } catch (e) {
             blacklistedpokemon = [];
         }
 
         // Update if in the blacklist
-        if (blacklistedpokemon.includes(current_pokemon.id) || current_pokemon.id == 0) {
+        if (blacklistedpokemon.includes(current_pokemon.id) || blacklistedpokemon.includes(current_pokemon.name) || blacklistedpokemon.includes(current_pokemon.form_name)) {
             update(true);
         }
     }
@@ -219,7 +235,7 @@ function update_properties(properties = {}) {
 
 
 
-    update();
+    update(current_pokemon.id === 0);
 }
 
 
@@ -238,8 +254,8 @@ function filter_pokemon_list() {
             (pokemon.sprite_type == "gen8" && !allowstaticgen8sprites) ||
             (pokemon.sprite_type == "artwork" && !allowstaticartworks) ||
             (pokemon.id >= 10000 && !allowalternateforms) ||
-            (blacklistedpokemon.length > 0 && blacklistedpokemon.includes(pokemon.entry)) ||
-            (whitelistedpokemon.length > 0 && !whitelistedpokemon.includes(pokemon.entry))
+            (blacklistedpokemon.length > 0 && (blacklistedpokemon.includes(pokemon.id) || blacklistedpokemon.includes(pokemon.entry) || blacklistedpokemon.includes(pokemon.name) || blacklistedpokemon.includes(pokemon.form_name))) ||
+            (whitelistedpokemon.length > 0 && !(whitelistedpokemon.includes(pokemon.id) || whitelistedpokemon.includes(pokemon.entry) || whitelistedpokemon.includes(pokemon.name) || whitelistedpokemon.includes(pokemon.form_name)))
         );
     });
 }

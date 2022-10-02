@@ -21,11 +21,11 @@ jobs:
           zip -r AnimatedPokemon.zip main.js
           zip -r AnimatedPokemon.zip pokemon.js
           zip -r AnimatedPokemon.zip Pokemon_Classic.ttf
-          zip -r AnimatedPokemon.zip sprites/
           zip -r AnimatedPokemon.zip project.json
           zip -r AnimatedPokemon.zip preview.gif
           zip -r AnimatedPokemon.zip LICENSE.txt
           zip -r AnimatedPokemon.zip README.md
+          zip -r AnimatedPokemon.zip sprites/
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
