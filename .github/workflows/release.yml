@@ -1,0 +1,33 @@
+name: Build and Release AnimatedPokemon
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build
+        run: python build.py
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          title: "AnimatedPokemon"
+          automatic_release_tag: "latest"
+          prerelease: false
+          files: |
+            index.html
+            main.css
+            main.js
+            pokemon.js
+            Pokemon_Classic.ttf
+            sprites/
+            project.json
+            preview.gif
+            LICENSE.txt
+            README.md
