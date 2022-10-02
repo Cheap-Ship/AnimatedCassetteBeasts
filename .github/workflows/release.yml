@@ -12,7 +12,20 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Build
-        run: python build.py
+        run: python build.py dont_cache
+
+      - name: Compress files for release
+        run: |
+          zip -r AnimatedPokemon.zip index.html
+          zip -r AnimatedPokemon.zip main.css
+          zip -r AnimatedPokemon.zip main.js
+          zip -r AnimatedPokemon.zip pokemon.js
+          zip -r AnimatedPokemon.zip Pokemon_Classic.ttf
+          zip -r AnimatedPokemon.zip sprites/
+          zip -r AnimatedPokemon.zip project.json
+          zip -r AnimatedPokemon.zip preview.gif
+          zip -r AnimatedPokemon.zip LICENSE.txt
+          zip -r AnimatedPokemon.zip README.md
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -21,13 +34,4 @@ jobs:
           automatic_release_tag: "latest"
           prerelease: false
           files: |
-            index.html
-            main.css
-            main.js
-            pokemon.js
-            Pokemon_Classic.ttf
-            sprites/
-            project.json
-            preview.gif
-            LICENSE.txt
-            README.md
+            AnimatedPokemon.zip

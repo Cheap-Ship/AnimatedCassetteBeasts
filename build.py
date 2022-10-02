@@ -22,6 +22,19 @@ artwork_url_prefix = "https://raw.githubusercontent.com/PokeAPI/sprites/master/s
 
 
 
+# If the first argument is dont_cache, then we don't use the cache
+caching = True
+if len(sys.argv) > 1 and sys.argv[1] == "dont_cache":
+    caching = False
+
+
+
+
+
+
+
+
+
 
 # creating all possible folders
 folders = "", "animated", "animated/female", "animated/shiny", "animated/shiny/female", "gen5", "gen5/female", "gen5/shiny", "gen5/shiny/female", "gen8", "gen8/female", "artwork"
@@ -62,9 +75,10 @@ if (os.path.isfile("cache/pokemon.json")):
         all_pokemon = json.load(f)
 else:
     all_pokemon = requests.get(api + "pokemon/?limit=99999").json()
-    with open("cache/pokemon.json", "w") as f:
-        json.dump(all_pokemon, f)
-        print("Cached pokemon.json")
+    if caching:
+        with open("cache/pokemon.json", "w") as f:
+            json.dump(all_pokemon, f)
+            print("Cached pokemon.json")
 
 
 
@@ -85,9 +99,10 @@ for pokemon_entry in all_pokemon["results"]:
             pokemon = json.load(f)
     else:
         pokemon = requests.get(pokemon_entry["url"]).json()
-        with open("cache/" + pokemon_entry["name"] + ".json", "w") as f:
-            json.dump(pokemon, f)
-            print("Cached:\t" + pokemon_entry["name"])
+        if caching:
+            with open("cache/" + pokemon_entry["name"] + ".json", "w") as f:
+                json.dump(pokemon, f)
+                print("Cached:\t" + pokemon_entry["name"])
 
 
 
