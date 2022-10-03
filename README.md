@@ -1,9 +1,13 @@
 # Animated Pokémon
-This is a custom Wallpaper Engine Web Wallpaper featuring **ALL** currently existing pokémon and their forms, most of the animated using Generation 5 sprites.
+This is a custom Wallpaper Engine Web Wallpaper featuring **ALL** currently existing pokémon and their forms, most of them animated using Generation 5 sprites.
 
 I do not own any rights to the sprites used in this wallpaper. The data and images used were provided by [PokéAPI](https://pokeapi.co/).
 
 ## Installing
+
+Available on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2870660754).
+
+### Manual Installation
 1. Download the latest [release](https://github.com/DaviAMSilva/AnimatedPokemon/releases/tag/latest) from the releases page;
 2. Extract the contents of the zip file to a folder;
 3. Right click on the desktop and select `Create Wallpaper`;

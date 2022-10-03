@@ -1,6 +1,6 @@
 {
 	"contentrating" : "Everyone",
-	"description" : "A simple wallpaper featuring all currently available pokémon as a animated sprite when possible.",
+	"description" : "[h1]Animated Pokémon[/h1]\r\nThis is a custom Wallpaper Engine Web Wallpaper featuring ALL currently existing pokémon and their forms, most of the animated using Generation 5 sprites.\r\n\r\nI do not own any rights to the sprites used in this wallpaper. The data and images used were provided by PokéAPI.\r\n\r\n[h2]Features[/h2]\r\n[list]\r\n[*] Customize the type of background and the colors;\r\n[*] Click on the pokédex national number to choose a new random pokémon;\r\n[*] Whitelist and blacklist pokémon to be displayed, using the pokédex national number, PokéAPI id or the pokémon name;\r\n[*] Adjust the speed in which pokémon are cycled through;\r\n[*] Choose the types of sprites to be displayed.\r\n[/list]\r\n\r\n[h2]Pokémon Sprites Types[/h2]\r\n[list]\r\n[*] [b]Animated:[/b] All 649 pokémon up to generation 5 (Black & White), enabled by default;\r\n[*] [b]Gen5:[/b] All remaining pokémon up to 898 (Sword & Shield) have been drawn using Gen5-like sprites that aren't animated;\r\n[*] [b]Gen8:[/b] Some alternate forms in Sword & Shield don't have Gen5-like sprites, so they have the Gen8 sprites instead;\r\n[*] [b]Artwork:[/b] Pokémon in Arceus and some alternate forms in Gen8 don't have sprites, so they use the official artwork instead.\r\n[/list]\r\n\r\nFor a better experience don't allow any other sprite type in the Wallpaper Engine settings to only show animated sprites.\r\n\r\nTo see all currently available pokémon in their original form, select [b]Allow Static Gen 5 Sprites[/b] and deselect [b]Allow Alternate Forms[/b].\r\n\r\nTo see all currently available pokémon and their alternate forms, allow every sprite type and select [b]Allow Alternate Forms[/b].\r\n\r\n[h2]External Resources[/h2]\r\nFont Credit: https://www.dafont.com/pokemon-classic.font\r\nData & Sprites Credit: https://github.com/PokeAPI/pokeapi\r\nSource Code: https://github.com/DaviAMSilva/AnimatedPokemon",
 	"file" : "index.html",
 	"general" : 
 	{
@@ -192,7 +192,11 @@
 		}
 	},
 	"preview" : "preview.gif",
+	"tags" : [ "Game" ],
 	"title" : "Animated Pokémon",
-	"type" : "web",
-	"version" : 0
+	"type" : "Web",
+	"version" : 1,
+	"visibility" : "public",
+	"workshopid" : "2870660754",
+	"workshopurl" : "steam://url/CommunityFilePage/2870660754"
 }
