@@ -519,6 +519,8 @@ update(true);
 
 // when clicking on number, update pokémon
 number.addEventListener("click", () => {
+    clearInterval(update_interval_number);
     update(true);
+    update_interval_number = setInterval(update, pokemonswitchingtimer * 1000);
 });
 info_interval_number = setInterval(update_info_timer, 10);
