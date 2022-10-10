@@ -100,7 +100,9 @@ window.wallpaperPropertyListener = {
 
 
 function update_properties(properties = {}) {
-    clearInterval(update_interval_number);
+    // don't change the timer and update the pokemon if the display detailed info is toggled
+    if (!properties.displaydetailedinfo)
+        clearInterval(update_interval_number);
 
     if (properties.allowalternateforms) {
         allowalternateforms = properties.allowalternateforms.value;
@@ -227,15 +229,15 @@ function update_properties(properties = {}) {
 
 
 
-    if (automaticpokemonswitching) {
+    if (automaticpokemonswitching && !properties.displaydetailedinfo) {
         update_interval_number = setInterval(() => {
             update(true);
         }, 1000 * pokemonswitchingtimer);
     }
 
 
-
-    update(current_pokemon.id === 0);
+    if (!properties.displaydetailedinfo)
+        update(current_pokemon.id === 0);
 }
 
 
@@ -521,6 +523,6 @@ update(true);
 number.addEventListener("click", () => {
     clearInterval(update_interval_number);
     update(true);
-    update_interval_number = setInterval(update, pokemonswitchingtimer * 1000);
+    update_interval_number = setInterval(() => {update(true)}, pokemonswitchingtimer * 1000);
 });
 info_interval_number = setInterval(update_info_timer, 10);
