@@ -100,8 +100,12 @@ window.wallpaperPropertyListener = {
 
 
 function update_properties(properties = {}) {
-    // don't change the timer and update the pokemon if the display detailed info is toggled
-    if (!properties.displaydetailedinfo)
+    if (properties.automaticpokemonswitching) {
+        automaticpokemonswitching = properties.automaticpokemonswitching.value;
+    }
+
+    // don't change the timer and update the pokemon if automatic pokemon switching is toggled
+    if (automaticpokemonswitching)
         clearInterval(update_interval_number);
 
     if (properties.allowalternateforms) {
@@ -131,9 +135,6 @@ function update_properties(properties = {}) {
         if (!allowstaticgen8sprites && current_pokemon.sprite_type == "gen8") {
             update(true);
         }
-    }
-    if (properties.automaticpokemonswitching) {
-        automaticpokemonswitching = properties.automaticpokemonswitching.value;
     }
     if (properties.backgroundtype) {
         backgroundtype = properties.backgroundtype.value;
@@ -229,11 +230,12 @@ function update_properties(properties = {}) {
 
 
 
-    if (automaticpokemonswitching && !properties.displaydetailedinfo) {
+    if (automaticpokemonswitching) {
         update_interval_number = setInterval(() => {
             update(true);
         }, 1000 * pokemonswitchingtimer);
     }
+
 
 
     if (!properties.displaydetailedinfo)
@@ -508,7 +510,10 @@ function update(randomize = false) {
 
 
 
+// update once on page load
+clearInterval(update_interval_number);
 update(true);
+update_interval_number = setInterval(() => { update(true) }, pokemonswitchingtimer * 1000);
 
 
 
@@ -523,6 +528,6 @@ update(true);
 number.addEventListener("click", () => {
     clearInterval(update_interval_number);
     update(true);
-    update_interval_number = setInterval(() => {update(true)}, pokemonswitchingtimer * 1000);
+    update_interval_number = setInterval(() => { update(true) }, pokemonswitchingtimer * 1000);
 });
 info_interval_number = setInterval(update_info_timer, 10);
