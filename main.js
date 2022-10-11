@@ -47,7 +47,7 @@ let displaylegend = true;
 
 let update_interval_number = 0;
 let info_interval_number = 0;
-let last_update_time;
+let last_update_time = Date.now();
 let current_pokemon = null;
 let pokemon_list_filtered = [];
 
@@ -74,8 +74,10 @@ const type_colors = {
     "fairy": "D685AD"
 };
 
-const substitute = { "id": 0, "entry": 0, "name": "substitute", "form_name": "substitute", "type1": "normal", "type2": null, "has_female": false, "has_shiny": false, "sprite_type": "none", "sprites": { "front_default": null, "front_shiny": null, "front_female": null, "front_shiny_female": null } };
-const substitute_base64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgBAMAAAAQtmoLAAAAIVBMVEUAAAAAAABKYzpSUkp7jFqUpWulvYS9vbW91pzWzsX////yT6gnAAAAAXRSTlMAQObYZgAAATtJREFUWMPtlE1qAkEQhduJB7B0EOJKJ50h5AABl3YewQPI4HYmzsMreIDIbBMEaZeBEKZOmY0HqCzc9Qe9649+9UM7l0gkEonEzcD1WBly7obd3C5krN1TN7ILJYD9sbEnQluRrM3318dtt5uQ1iLePvZdJ3yhNdN62x3fSVqFjBWv2DJltchVsTU2yz2kYvvDjU0YwAMyflYg2IrIAwCEb2Dl7E8AMAuZBA8AhVUom0kAEOhhq7qkP8cTpqyNQlbrRfU05S43CjO9qPY5kS9sRcx6VdVPH2AT7rRXVT0BCKZMD5deVWPhjUL2Gn+1jwUbj2CZhMfyHGNBskGwNLbAMh6+SHLjLaMbwK/i4bEgW3gvltULuD+PUbbAQmzbHRaSw9oj5wYizgkCVvKP39WJyMglEolEInEz/gCH72C9Catf4wAAAABJRU5ErkJggg=="
+
+
+const substitute = current_pokemon = { "id": 0, "entry": 0, "name": "substitute", "form_name": "substitute", "type1": "normal", "type2": null, "has_female": false, "has_shiny": false, "sprite_type": "none", "sprites": { "front_default": null, "front_shiny": null, "front_female": null, "front_shiny_female": null } };
+const substitute_base64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgBAMAAAAQtmoLAAAAIVBMVEUAAAAAAABKYzpSUkp7jFqUpWulvYS9vbW91pzWzsX////yT6gnAAAAAXRSTlMAQObYZgAAATtJREFUWMPtlE1qAkEQhduJB7B0EOJKJ50h5AABl3YewQPI4HYmzsMreIDIbBMEaZeBEKZOmY0HqCzc9Qe9649+9UM7l0gkEonEzcD1WBly7obd3C5krN1TN7ILJYD9sbEnQluRrM3318dtt5uQ1iLePvZdJ3yhNdN62x3fSVqFjBWv2DJltchVsTU2yz2kYvvDjU0YwAMyflYg2IrIAwCEb2Dl7E8AMAuZBA8AhVUom0kAEOhhq7qkP8cTpqyNQlbrRfU05S43CjO9qPY5kS9sRcx6VdVPH2AT7rRXVT0BCKZMD5deVWPhjUL2Gn+1jwUbj2CZhMfyHGNBskGwNLbAMh6+SHLjLaMbwK/i4bEgW3gvltULuD+PUbbAQmzbHRaSw9oj5wYizgkCVvKP39WJyMglEolEInEz/gCH72C9Catf4wAAAABJRU5ErkJggg==";
 
 
 
@@ -85,7 +87,7 @@ const substitute_base64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgBAMAAAAQtmoLAAAAIVBMV
 
 
 
-// Wallpaper Engine Properties
+// wallpaper Engine Properties
 window.wallpaperPropertyListener = {
     applyUserProperties: update_properties
 };
@@ -100,13 +102,27 @@ window.wallpaperPropertyListener = {
 
 
 function update_properties(properties = {}) {
+    // deals with the switching of pokemon
+    if (properties.pokemonswitchingtimer) {
+        clearInterval(update_interval_number);
+        pokemonswitchingtimer = properties.pokemonswitchingtimer.value;
+
+        if (automaticpokemonswitching) {
+            update_interval_number = setInterval(() => { update(true); }, pokemonswitchingtimer * 1000);
+        }
+        update();
+    }
     if (properties.automaticpokemonswitching) {
+        clearInterval(update_interval_number);
         automaticpokemonswitching = properties.automaticpokemonswitching.value;
+
+        if (automaticpokemonswitching) {
+            update_interval_number = setInterval(() => { update(true); }, pokemonswitchingtimer * 1000);
+        }
+        update();
     }
 
-    // don't change the timer and update the pokemon if automatic pokemon switching is toggled
-    if (automaticpokemonswitching)
-        clearInterval(update_interval_number);
+
 
     if (properties.allowalternateforms) {
         allowalternateforms = properties.allowalternateforms.value;
@@ -150,12 +166,14 @@ function update_properties(properties = {}) {
                 whitelistedpokemon = properties.whitelistedpokemon.value.split(",").map((value) => {
                     return parseInt(value) || value.trim();
                 });
-        } catch (e) {
+        } catch {
             whitelistedpokemon = [];
         }
 
+        filter_pokemon_list();
+
         // Update if not in the whitelist
-        if (whitelistedpokemon.length > 0 && (!(whitelistedpokemon.includes(current_pokemon.id) || whitelistedpokemon.includes(current_pokemon.name) || whitelistedpokemon.includes(current_pokemon.form_name)))) {
+        if (whitelistedpokemon.length > 0 && (!(whitelistedpokemon.includes(current_pokemon.id) || whitelistedpokemon.includes(current_pokemon.name) || whitelistedpokemon.includes(current_pokemon.form_name))) || whitelistedpokemon.length == 0 && current_pokemon.id == 0) {
             update(true);
         }
     }
@@ -167,17 +185,16 @@ function update_properties(properties = {}) {
                 blacklistedpokemon = properties.blacklistedpokemon.value.split(",").map((value) => {
                     return parseInt(value) || value.trim();
                 });
-        } catch (e) {
+        } catch {
             blacklistedpokemon = [];
         }
 
+        filter_pokemon_list();
+
         // Update if in the blacklist
-        if (blacklistedpokemon.includes(current_pokemon.id) || blacklistedpokemon.includes(current_pokemon.name) || blacklistedpokemon.includes(current_pokemon.form_name)) {
+        if (blacklistedpokemon.includes(current_pokemon.id) || blacklistedpokemon.includes(current_pokemon.name) || blacklistedpokemon.includes(current_pokemon.form_name) || blacklistedpokemon.length == 0 && current_pokemon.id == 0) {
             update(true);
         }
-    }
-    if (properties.pokemonswitchingtimer) {
-        pokemonswitchingtimer = properties.pokemonswitchingtimer.value;
     }
     if (properties.schemecolor) {
         // convert "0.0 0.0 0.0" to [r, g, b]
@@ -230,16 +247,11 @@ function update_properties(properties = {}) {
 
 
 
-    if (automaticpokemonswitching) {
-        update_interval_number = setInterval(() => {
-            update(true);
-        }, 1000 * pokemonswitchingtimer);
-    }
-
-
-
-    if (!properties.displaydetailedinfo)
-        update(current_pokemon.id === 0);
+    // update everything but the pokemon
+    update_background();
+    update_legend();
+    update_info();
+    update_info_timer();
 }
 
 
@@ -433,9 +445,11 @@ pokemon_list_filtered.length = ${pokemon_list_filtered.length}`;
 }
 
 
+
 function update_info_timer() {
-    infoTimer.innerText = `next_update = ${Math.ceil((last_update_time - Date.now()) / 1000) + pokemonswitchingtimer}`;
+    infoTimer.innerText = automaticpokemonswitching ? `next_update = ${Math.ceil((last_update_time - Date.now()) / 1000) + pokemonswitchingtimer}` : "next_update = null";
 }
+
 
 
 
@@ -451,6 +465,7 @@ function update_pokemon() {
 
     // 50/50 chances of female even though some pokemon have different gender rates
     let is_female = current_pokemon.has_female && Math.random() < 0.5;
+
     // shiny chance for newer pokemon games
     let is_shiny = current_pokemon.has_shiny && Math.random() < 1 / 4096;
 
@@ -512,8 +527,8 @@ function update(randomize = false) {
 
 // update once on page load
 clearInterval(update_interval_number);
+update_interval_number = setInterval(() => { update(true); }, pokemonswitchingtimer * 1000);
 update(true);
-update_interval_number = setInterval(() => { update(true) }, pokemonswitchingtimer * 1000);
 
 
 
@@ -524,10 +539,9 @@ update_interval_number = setInterval(() => { update(true) }, pokemonswitchingtim
 
 
 
-// when clicking on number, update pokémon
+// when clicking on the id number update the pokemon
 number.addEventListener("click", () => {
     clearInterval(update_interval_number);
+    update_interval_number = setInterval(() => { update(true); }, pokemonswitchingtimer * 1000);
     update(true);
-    update_interval_number = setInterval(() => { update(true) }, pokemonswitchingtimer * 1000);
 });
-info_interval_number = setInterval(update_info_timer, 10);
