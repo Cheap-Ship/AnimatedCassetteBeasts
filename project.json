@@ -1,54 +1,30 @@
 {
 	"contentrating" : "Everyone",
-	"description" : "[h1]Animated Pokémon[/h1]\r\nThis is a custom Wallpaper Engine Web Wallpaper featuring ALL currently existing pokémon and their forms, most of the animated using Generation 5 sprites.\r\n\r\nI do not own any rights to the sprites used in this wallpaper. The data and images used were provided by PokéAPI.\r\n\r\n[h2]Features[/h2]\r\n[list]\r\n[*] Customize the type of background and the colors;\r\n[*] Click on the pokédex national number to choose a new random pokémon;\r\n[*] Whitelist and blacklist pokémon to be displayed, using the pokédex national number, PokéAPI id or the pokémon name;\r\n[*] Adjust the speed in which pokémon are cycled through;\r\n[*] Choose the types of sprites to be displayed.\r\n[/list]\r\n\r\n[h2]Pokémon Sprites Types[/h2]\r\n[list]\r\n[*] [b]Animated:[/b] All 649 pokémon up to generation 5 (Black & White), enabled by default;\r\n[*] [b]Gen5:[/b] All remaining pokémon up to 898 (Sword & Shield) have been drawn using Gen5-like sprites that aren't animated;\r\n[*] [b]Gen8:[/b] Some alternate forms in Sword & Shield don't have Gen5-like sprites, so they have the Gen8 sprites instead;\r\n[*] [b]Artwork:[/b] Pokémon in Arceus and some alternate forms in Gen8 don't have sprites, so they use the official artwork instead.\r\n[/list]\r\n\r\nFor a better experience don't allow any other sprite type in the Wallpaper Engine settings to only show animated sprites.\r\n\r\nTo see all currently available pokémon in their original form, select [b]Allow Static Gen 5 Sprites[/b] and deselect [b]Allow Alternate Forms[/b].\r\n\r\nTo see all currently available pokémon and their alternate forms, allow every sprite type and select [b]Allow Alternate Forms[/b].\r\n\r\n[h2]External Resources[/h2]\r\nFont Credit: https://www.dafont.com/pokemon-classic.font\r\nData & Sprites Credit: https://github.com/PokeAPI/pokeapi\r\nSource Code: https://github.com/DaviAMSilva/AnimatedPokemon",
+	"description" : "[h1]Animated Cassette Beasts[/h1]\r\nThis is a custom Wallpaper Engine Web Wallpaper featuring ALL currently existing Cassette Beasts (no bootlegs yet).\r\n\r\nI do not own any rights to the sprites used in this wallpaper. The data and images used were provided by the Cassette Beasts Wiki.\r\n\r\n[h2]Features[/h2]\r\n[list]\r\n[*] Click on the cassette number to choose a new random cassette;\r\n[*] Whitelist and blacklist cassettes to be displayed, using their number;\r\n[*] Adjust the speed in which cassettes are cycled through;\r\n[/list]\r\n\r\nFor a better experience don't allow any other sprite type in the Wallpaper Engine settings to only show animated sprites.\r\n\r\n[h2]External Resources[/h2]\r\nFont Credit: https://www.dafont.com/pokemon-classic.font\r\nData & Sprites Credit: https://github.com/PokeAPI/pokeapi\r\nSource Code: https://github.com/DaviAMSilva/AnimatedPokemon",
 	"file" : "index.html",
 	"general" : 
 	{
 		"properties" : 
 		{
-			"allowalternateforms" : 
-			{
-				"index" : 3,
-				"order" : 103,
-				"text" : "Allow Alternate Forms",
-				"type" : "bool",
-				"value" : true
-			},
 			"allowstaticartworks" : 
 			{
 				"index" : 2,
 				"order" : 102,
 				"text" : "Allow Static Artworks",
 				"type" : "bool",
-				"value" : false
+				"value" : true
 			},
-			"allowstaticgen5sprites" : 
-			{
-				"index" : 0,
-				"order" : 100,
-				"text" : "Allow Static Gen 5 Sprites",
-				"type" : "bool",
-				"value" : false
-			},
-			"allowstaticgen8sprites" : 
-			{
-				"index" : 1,
-				"order" : 101,
-				"text" : "Allow Static Gen 8 Sprites",
-				"type" : "bool",
-				"value" : false
-			},
-			"automaticpokemonswitching" : 
+			"automaticcassetteswitching" : 
 			{
 				"index" : 4,
 				"order" : 104,
-				"text" : "Automatic Pokémon Switching",
+				"text" : "Automatic Cassette Switching",
 				"type" : "bool",
 				"value" : true
 			},
 			"backgroundcolor" : 
 			{
-				"condition" : "backgroundtype.value == \"lineargradient\" || backgroundtype.value == \"radialgradient\" || backgroundtype.value == \"solid\"",
+				"condition" : "backgroundtype.value == \"solid\"",
 				"index" : 8,
 				"order" : 108,
 				"text" : "Background Color",
@@ -61,26 +37,9 @@
 				"options" : 
 				[
 					{
-						"label" : "Linear Gradient",
-						"value" : "lineargradient"
-					},
-					{
-						"label" : "Radial Gradient",
-						"value" : "radialgradient"
-					},
-					{
-						"label" : "Mix Types Color",
-						"value" : "mixtypes"
-					},
-					{
-						"label" : "First Type Color",
-						"value" : "firsttype"
-					},
-					{
-						"label" : "Second Type Color",
-						"value" : "secondtype"
-					},
-					{
+						"label" : "Type Color",
+						"value" : "type"
+					},{
 						"label" : "Solid Color",
 						"value" : "solid"
 					}
@@ -88,13 +47,13 @@
 				"order" : 106,
 				"text" : "Background Type",
 				"type" : "combo",
-				"value" : "lineargradient"
+				"value" : "type"
 			},
-			"blacklistedpokemon" : 
+			"blacklistedcassette" : 
 			{
 				"index" : 15,
 				"order" : 115,
-				"text" : "Blacklisted Pokémon (comma separated)",
+				"text" : "Blacklisted Cassettes (comma separated)",
 				"type" : "textinput",
 				"value" : ""
 			},
@@ -119,7 +78,7 @@
 			{
 				"index" : 9,
 				"order" : 109,
-				"text" : "Display Pokémon Information",
+				"text" : "Display Cassette Information",
 				"type" : "bool",
 				"value" : true
 			},
@@ -144,15 +103,15 @@
 				"type" : "slider",
 				"value" : 135
 			},
-			"pokemonswitchingtimer" : 
+			"cassetteswitchingtimer" : 
 			{
-				"condition" : "automaticpokemonswitching.value == true",
+				"condition" : "automaticcassetteswitching.value == true",
 				"fraction" : false,
 				"index" : 5,
 				"max" : 86400,
 				"min" : 5,
 				"order" : 105,
-				"text" : "Pokémon Switching Timer (seconds)",
+				"text" : "Cassette Switching Timer (seconds)",
 				"type" : "slider",
 				"value" : 300
 			},
@@ -181,11 +140,11 @@
 				"type" : "color",
 				"value" : "1 1 1"
 			},
-			"whitelistedpokemon" : 
+			"whitelistedcassette" : 
 			{
 				"index" : 14,
 				"order" : 114,
-				"text" : "Whitelisted Pokémon (comma separated)",
+				"text" : "Whitelisted Cassettes (comma separated)",
 				"type" : "textinput",
 				"value" : ""
 			}
@@ -193,10 +152,8 @@
 	},
 	"preview" : "preview.gif",
 	"tags" : [ "Game" ],
-	"title" : "Animated Pokémon",
+	"title" : "Animated Cassette Beasts",
 	"type" : "Web",
 	"version" : 1,
-	"visibility" : "public",
-	"workshopid" : "2870660754",
-	"workshopurl" : "steam://url/CommunityFilePage/2870660754"
+	"visibility" : "private"
 }
